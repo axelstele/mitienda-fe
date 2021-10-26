@@ -1,17 +1,9 @@
 import React, { useState } from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import {
+  Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid,
+  Box, Typography, Container, createTheme, ThemeProvider, InputAdornment,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAppDispatch } from 'redux/hooks';
 import { user } from 'redux/reducers/user';
 
@@ -36,11 +28,14 @@ const Register = () => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [url, setUrl] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    dispatch(user.register({ name, email, password }));
+    dispatch(user.register({
+      name, email, url, password,
+    }));
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +44,10 @@ const Register = () => {
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
+  };
+
+  const handleUrlChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUrl(event.target.value);
   };
 
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -98,6 +97,21 @@ const Register = () => {
                   autoComplete="email"
                   onChange={handleEmailChange}
                   value={email}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  id="url"
+                  label="URL"
+                  name="url"
+                  autoComplete="url"
+                  onChange={handleUrlChange}
+                  value={url}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">www.mitienda.com/</InputAdornment>,
+                  }}
                 />
               </Grid>
               <Grid item xs={12}>

@@ -135,9 +135,6 @@ const Home = () => (
             Support
           </Link>
         </nav>
-        <Button href="/register" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
-          Sign Up
-        </Button>
         <Button href="/login" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
           Login
         </Button>
